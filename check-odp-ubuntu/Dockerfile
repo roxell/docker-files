@@ -53,7 +53,4 @@ ADD check-odp /root/bin/check-odp
 # Needed to build DPDK
 ADD uname /root/bin/uname
 
-
 ENV HOSTNAME odp-ubuntu-1504
-
-ENTRYPOINT /bin/bash

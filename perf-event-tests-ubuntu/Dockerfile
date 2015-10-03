@@ -15,6 +15,4 @@ ENV DEBIAN_FRONTEND noninteractive
 ## Needed to build
 ADD clone-and-build-perf-event-tests /root/bin/clone-and-build-perf-event-tests
 
-ENV HOSTNAME odp-ubuntu-1504
-
-ENTRYPOINT /bin/bash
+ENV HOSTNAME perf-ubuntu-1504

@@ -34,6 +34,6 @@ ENV PATH /root/bin:$PATH
 
 ADD mountsshfs /root/bin/mountsshfs
 
-ENV HOSTNAME odp-ubuntu-1504
+ENV HOSTNAME ubuntu-dev-1504
 
 ENTRYPOINT /bin/bash
