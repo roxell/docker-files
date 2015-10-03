@@ -1,0 +1,19 @@
+#!/bin/sh
+
+case $1 in
+  -m)
+    echo "x86_64"
+    ;;
+  -p)
+    echo "x86_64"
+    ;;
+  -r)
+    echo "4.1.7-200.fc22.x86_64"
+    ;;
+  -s)
+    echo "Linux"
+    ;;
+  -v)
+    echo "#50-Ubuntu SMP Sat Nov 1 02:47:06 CET 2014"
+    ;;
+esac

@@ -1,0 +1,97 @@
+#¡/bin/bash
+
+pushd $HOME
+
+GIT_PROJECT=perf_event_tests
+GIT_URL=${GIT_URL:-git://github.com/deater/${GIT_PROJECT}}
+GIT_BRANCH=${GIT_BRANCH:-master}
+TOOLCHAIN_RELEASE="${TOOLCHAIN_RELEASE:-15.02}"
+
+usage()
+{
+    echo -e "$0 makes use of the following environment variables,"
+    echo -e "\tGIT_URL:\t   which ${GIT_PROJECT} git repo to use,"
+    echo -e "\t\t\t   default: ${GIT_URL}"
+    echo -e "\tGIT_BRANCH:\t   which branch to checkout and test, default: ${GIT_BRANCH}"
+    echo -e "\tTOOLCHAIN_RELEASE: set toolchain release, default: ${TOOLCHAIN_RELEASE}"
+    echo -e "\t\t\t   Only used when ARCH is given!"
+    echo -e "\t\t\t   Linaros toolchain releases are located here:"
+    echo -e "\t\t\t   http://releases.linaro.org/${TOOLCHAIN_RELEASE}/components/toolchain/binaries/"
+}
+
+find_toolchain_to_download()
+{
+    toolchain_url="http://releases.linaro.org/${TOOLCHAIN_RELEASE}/components/toolchain/binaries/arm-linux-gnueabihf/gcc-linaro-4.9-20${TOOLCHAIN_RELEASE}-3-x86_64_arm-linux-gnueabihf.tar.xz"
+    [[ ${ARCH} == "armeb" ]] && toolchain_url="http://releases.linaro.org/${TOOLCHAIN_RELEASE}/components/toolchain/binaries/armeb-linux-gnueabihf/gcc-linaro-4.9-20${TOOLCHAIN_RELEASE}-3-x86_64_armeb-linux-gnueabihf.tar.xz"
+    [[ ${ARCH} == "arm64" ]] && toolchain_url="http://releases.linaro.org/${TOOLCHAIN_RELEASE}/components/toolchain/binaries/aarch64-linux-gnu/gcc-linaro-4.9-20${TOOLCHAIN_RELEASE}-3-x86_64_aarch64-linux-gnu.tar.xz"
+    [[ ${ARCH} == "arm64be" ]] && toolchain_url="http://releases.linaro.org/${TOOLCHAIN_RELEASE}/components/toolchain/binaries/aarch64_be-linux-gnu/gcc-linaro-4.9-20${TOOLCHAIN_RELEASE}-3-x86_64_aarch64_be-linux-gnu.tar.xz"
+    echo $toolchain_url
+    export tcbindir="$HOME/$ARCH-tc-${TOOLCHAIN_RELEASE}/bin"
+    mkdir -p $(dirname ${tcbindir})
+}
+
+install_custom_toolchain()
+{
+    test -d ${tcbindir} && return 0
+    test -z "${toolchain_url}" && return 0
+    toolchain=`basename ${toolchain_url}`
+    test -f ${toolchain} || curl -sSO ${toolchain_url}
+    mkdir -p `dirname ${tcbindir}`
+    tar --strip-components=1 -C `dirname ${tcbindir}` -xf ${toolchain}
+    if [[ $? -ne 0 ]]; then
+        echo "NO toolchain to extract..."
+        exit 1
+    fi
+}
+
+setup_compiler_prefix()
+{
+    export PATH="${tcbindir}:$PATH"
+    if [ "${ARCH}" = "arm" ]; then
+      compiler_prefix="arm-linux-gnueabihf"
+    elif [ "$ARCH" = "armeb" ]; then
+      compiler_prefix="armeb-linux-gnueabihf"
+    elif [ "$ARCH" = "arm64" ]; then
+      compiler_prefix="aarch64-linux-gnu"
+    elif [ "$ARCH" = "arm64be" ]; then
+      compiler_prefix="aarch64_be-linux-gnu"
+    fi
+
+    [[ -n ${compiler_prefix} ]] && export CROSS_COMPILE=${compiler_prefix}-
+}
+
+toolchain_prepare()
+{
+    [[ -z ${ARCH} ]] && return
+
+    find_toolchain_to_download
+    install_custom_toolchain
+    setup_compiler_prefix
+}
+
+if [[ "x$1" = "x-h" || "x$1" = "x--help" ]]; then
+    usage
+    exit 0
+fi
+
+export GIT_SSL_NO_VERIFY=true
+git clone -b ${GIT_BRANCH} ${GIT_URL} $HOME/${GIT_PROJECT}
+
+pushd $HOME/${GIT_PROJECT}
+# CROSS_COMPILE is set in setup_compiler_prefix()
+make install || exit 1
+echo "Cleaning up the sandbox..."
+git clean -xdf >/dev/null
+export ARCH=arm
+toolchain_prepare
+make install prefix=/opt/${ARCH}/${GIT_PROJECT} || exit 1
+echo "Cleaning up the sandbox..."
+git clean -xdf >/dev/null
+export ARCH=arm64
+toolchain_prepare
+make install prefix=/opt/${ARCH}/${GIT_PROJECT} || exit 1
+popd
+rm -rf ${HOME}/${GIT_PROJECT}
+popd
+
+## vim: set ft=sh sw=4 sts=4 et foldmethod=syntax : ##

@@ -1,0 +1,4 @@
+#¡/bin/bash
+
+cd $HOME
+git clone git://git.linaro.org/people/anders.roxell/check-odp.git
