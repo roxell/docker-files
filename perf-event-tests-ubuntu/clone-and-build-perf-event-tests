@@ -6,6 +6,18 @@ GIT_PROJECT=perf_event_tests
 GIT_URL=${GIT_URL:-git://github.com/deater/${GIT_PROJECT}}
 GIT_BRANCH=${GIT_BRANCH:-master}
 TOOLCHAIN_RELEASE="${TOOLCHAIN_RELEASE:-15.02}"
+export success=0
+
+trap cleanup_exit INT TERM EXIT
+cleanup_exit()
+{
+    if [[ ${success} -eq 1 ]]; then
+        rm -rf ${HOME}/${GIT_PROJECT}
+        echo "Success to build ${GIT_PROJECT}"
+    else
+        echo "Failed to build ${GIT_PROJECT}"
+    fi
+}
 
 usage()
 {
@@ -91,7 +103,7 @@ export ARCH=arm64
 toolchain_prepare
 make install prefix=/opt/${ARCH}/${GIT_PROJECT} || exit 1
 popd
-rm -rf ${HOME}/${GIT_PROJECT}
 popd
+export success=1
 
 ## vim: set ft=sh sw=4 sts=4 et foldmethod=syntax : ##
