@@ -21,6 +21,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	libtool \
 	doxygen \
 	libssl-dev \
+	ifupdown \
 	# ODP optional deps
 	graphviz \
 	clang \
