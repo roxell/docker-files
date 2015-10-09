@@ -27,6 +27,7 @@ RUN dnf -y update && dnf install -y \
 	curl \
 	wget \
 	bzip2 \
+	iproute \
 	# ODP deps
 	autoconf \
 	automake \
