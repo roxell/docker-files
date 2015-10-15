@@ -16,13 +16,13 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends \
 	# Base packages
 	build-essential \
+	ca-certificates \
+	curl \
 	gcc-multilib \
+	git-core \
 	libc6-dev-i386 \
 	lib32stdc++6 \
 	lib32z1 \
-	git-core \
-	ca-certificates \
-	curl \
 	wget \
 	# Extra
 	sshfs \
