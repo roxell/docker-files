@@ -21,6 +21,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	lib32stdc++6 \
 	lib32z1 \
 	git-core \
+	ca-certificates \
 	curl \
 	wget \
 	# Extra
