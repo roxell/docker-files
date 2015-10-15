@@ -4,7 +4,7 @@
 ############################################################
 
 # Set the base image to Ubuntu
-FROM ubuntu:15.04
+FROM ubuntu:15.10
 
 # File Author / Maintainer
 MAINTAINER anders.roxell@linaro.org
@@ -38,6 +38,6 @@ ENV PATH /root/bin:$PATH
 
 ADD mountsshfs /root/bin/mountsshfs
 
-ENV HOSTNAME ubuntu-dev-1504
+ENV HOSTNAME ubuntu-dev-1510
 
 ENTRYPOINT /bin/bash
