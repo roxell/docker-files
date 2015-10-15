@@ -15,16 +15,16 @@ ENV DEBIAN_FRONTEND noninteractive
 # Update database and install base packages
 RUN apt-get update && apt-get install -y --no-install-recommends \
 	# ODP deps
-	lcov \
 	autoconf \
 	automake \
-	libtool \
 	doxygen \
-	libssl-dev \
 	ifupdown \
+	lcov \
+	libssl-dev \
+	libtool \
 	# ODP optional deps
-	graphviz \
 	clang \
+	graphviz \
 	# Smatch deps
 	libsqlite3-dev \
 	# DPDK deps
