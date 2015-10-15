@@ -20,9 +20,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	curl \
 	gcc-multilib \
 	git-core \
+	inetutils-ping \
+	inetutils-tools \
 	libc6-dev-i386 \
 	lib32stdc++6 \
 	lib32z1 \
+	net-tools \
 	wget \
 	# Extra
 	sshfs \
