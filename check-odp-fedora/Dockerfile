@@ -12,27 +12,27 @@ MAINTAINER anders.roxell@linaro.org
 # Update database and install base packages
 RUN dnf -y update && dnf install -y \
 	# Base packages
+	bzip2 \
+	curl \
 	gcc \
 	gcc-c++ \
+	git \
 	glibc-devel.x86_64 \
-	libstdc++.i686 \
-	libstdc++-devel.i686 \
 	glibc.i686 \
 	glibc-devel.i686 \
+	graphviz \
+	iproute \
+	libstdc++.i686 \
+	libstdc++-devel.i686 \
+	make \
+	wget \
 	zlib.i686 \
 	zlib-devel.i686 \
-	make \
-	graphviz \
-	git \
-	curl \
-	wget \
-	bzip2 \
-	iproute \
 	# ODP deps
 	autoconf \
 	automake \
-	libtool \
 	doxygen \
+	libtool \
 	openssl-devel \
 	# ODP optional deps
 	clang \
