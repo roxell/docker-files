@@ -19,6 +19,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	automake \
 	asciidoc \
 	doxygen \
+	graphviz \
 	ifupdown \
 	lcov \
 	libssl-dev \
@@ -26,7 +27,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	source-highlight \
 	# ODP optional deps
 	clang \
-	graphviz \
 	# Smatch deps
 	libsqlite3-dev \
 	# DPDK deps
