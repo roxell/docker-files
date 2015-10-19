@@ -17,11 +17,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	# ODP deps
 	autoconf \
 	automake \
+	asciidoc \
 	doxygen \
 	ifupdown \
 	lcov \
 	libssl-dev \
 	libtool \
+	source-highlight \
 	# ODP optional deps
 	clang \
 	graphviz \
