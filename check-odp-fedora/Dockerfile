@@ -31,6 +31,7 @@ RUN dnf -y update && dnf install -y \
 	# ODP deps
 	autoconf \
 	automake \
+	asciidoc \
 	doxygen \
 	libtool \
 	openssl-devel \
