@@ -4,7 +4,7 @@
 ############################################################
 
 # Set the base image to Ubuntu
-FROM roxell/ubuntu-dev
+FROM roxell/ubuntu-dev:15.04
 
 # File Author / Maintainer
 MAINTAINER anders.roxell@linaro.org
