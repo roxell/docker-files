@@ -33,6 +33,7 @@ RUN dnf -y update && dnf install -y \
 	automake \
 	asciidoc \
 	doxygen \
+	ImageMagick \
 	libtool \
 	openssl-devel \
 	# ODP optional deps
