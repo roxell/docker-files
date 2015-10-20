@@ -23,6 +23,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	ifupdown \
 	imagemagick \
 	lcov \
+	librsvg2-bin \
 	libssl-dev \
 	libtool \
 	source-highlight \
