@@ -27,6 +27,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	libssl-dev \
 	libtool \
 	source-highlight \
+	texlive-latex-recommended \
 	# ODP optional deps
 	clang \
 	# Smatch deps
@@ -37,6 +38,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	libpcap-dev \
 	sudo \
 	# Cleanup
+	&& apt-get remove -y \
+	texlive-latex-recommended-doc \
+	texlive-latex-base-doc \
+	texlive-pictures-doc \
+	texlive-pstricks-doc \
 	&& apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN git config --global user.name "Docker ODP" \
