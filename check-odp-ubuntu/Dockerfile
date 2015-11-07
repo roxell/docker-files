@@ -35,6 +35,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	linux-headers-3.19.0-30-generic \
 	linux-image-3.19.0-30-generic \
 	libpcap-dev \
+	sudo \
 	# Cleanup
 	&& apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
