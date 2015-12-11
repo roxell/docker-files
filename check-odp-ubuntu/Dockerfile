@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	autoconf \
 	automake \
 	asciidoc \
+	libcunit1-dev \
 	doxygen \
 	graphviz \
 	ifupdown \
