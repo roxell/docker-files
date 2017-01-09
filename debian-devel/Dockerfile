@@ -45,7 +45,9 @@ RUN ln -sf /home/devel/etc/bash/bash_logout   /home/devel/.bash_logout
 RUN ln -sf /home/devel/etc/git/gitconfig      /home/devel/.gitconfig
 RUN ln -sf /home/devel/etc/git/gitignore      /home/devel/.gitignore
 RUN ln -sf /home/devel/etc/gdbinit            /home/devel/.gdbinit
-RUN ln -sf /home/devel/etc/skel               /home/devel/skel
+RUN ln -sf /home/devel/etc/bash               /home/devel/.bash
+RUN ln -sf /home/devel/etc/shell              /home/devel/.shell
+RUN ln -sf /home/devel/etc/zsh                /home/devel/.zsh
 RUN ln -sf /home/devel/etc/toprc              /home/devel/.toprc
 RUN ln -sf /home/devel/etc/tmux/tmux.conf     /home/devel/.tmux.conf
 RUN ln -sf /home/devel/etc/urxvt              /home/devel/.urxvt
