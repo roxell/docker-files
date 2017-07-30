@@ -4,7 +4,7 @@
 ############################################################
 
 # Set the base image to Debian
-FROM debian:jessie
+FROM debian:stretch
 
 # File Author / Maintainer
 MAINTAINER anders.roxell@gmail.com
@@ -20,8 +20,8 @@ RUN apt-get update && \
     apt-get install -y build-essential git lib32stdc++6 \
     lib32z1 gcc-multilib curl wget vim-nox gdb strace zsh \
     rxvt-unicode-256color lcov autoconf automake libtool \
-    doxygen graphviz libssl-dev libcunit1-dev clang-3.5 \
-    fakeroot dpkg-dev bc tmux sudo keychain
+    doxygen graphviz libssl-dev libcunit1-dev clang-3.9 \
+    fakeroot dpkg-dev bc tmux sudo keychain procps
 
 # Setup home environment
 RUN useradd -b /home/ -m -s /bin/zsh devel && echo "devel:docker" | chpasswd
